@@ -4,6 +4,7 @@
 <p class="text-danger"><%= flash[:error].html_safe unless flash[:error].blank? %></p>
 
 <h3 class="font-weight-bold">Products</h3>
+<%= link_to 'New Product', new_product_path %>
 
 <table class="table table-striped">
   <thead class="thead-light">
@@ -33,4 +34,3 @@
 </table>
 <br>
 
-<%= link_to 'New Product', new_product_path %>
