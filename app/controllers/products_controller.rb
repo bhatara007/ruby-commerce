@@ -14,18 +14,23 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   # POST /products or /products.json
   def create
-    @products = Product.create(product_params)
-    flash[:success] = "Product created"
-    if @products.invalid?
+    @product = Product.new(product_params)
+    @product.category_id = params[:category_id]
+    if @product.invalid?
       flash[:error] = @products.errors.objects.first.full_message
+    end
+    if @product.save
+      flash[:success] = "Product created"
     end
 
     redirect_to action: :index
@@ -33,6 +38,7 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
+    @product.category_id = params[:category_id]
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: "Product was successfully updated." }

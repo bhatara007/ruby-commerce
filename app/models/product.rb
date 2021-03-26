@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
 
+    belongs_to :category
     validate :no_negative_stock
 
     def no_negative_stock
