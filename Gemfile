@@ -36,6 +36,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
+  gem 'sqlite3', '~> 1.4'
 
 
   # Display performance information such as SQL time and flame graphs for each request in your browser.
@@ -53,7 +54,7 @@ end
 
 
 group :production do
-  gem 'sqlite3', '~> 1.4'
+  gem 'pg'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
