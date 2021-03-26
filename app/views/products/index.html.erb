@@ -4,10 +4,11 @@
 <p class="text-danger"><%= flash[:error].html_safe unless flash[:error].blank? %></p>
 
 <h3 class="font-weight-bold">Products</h3>
-
-<%= link_to 'New Product', new_product_path %>
-<%= link_to 'New Category', new_category_path%>
-<%= link_to 'Show Category', categories_path %>
+<% if admin_signed_in? %>
+  <%= link_to 'New Product', new_product_path %>
+  <%= link_to 'New Category', new_category_path%>
+  <%= link_to 'Show Category', categories_path %>
+<%end%>
 <table class="table table-striped">
   <thead class="thead-light">
   <tr>
