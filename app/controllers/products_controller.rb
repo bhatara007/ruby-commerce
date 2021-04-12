@@ -5,6 +5,24 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all
+    respond_to do |format|
+      format.html
+      format.csv {send_data generate_csv(Product.all), file_name: 'products.csv'}
+    end
+  end
+
+  def csv_upload
+    data = params[:csv_file].read.split("\n")
+    data.each do |line|
+      attr = line.split(",").map(&:strip)
+      p = Product.new
+      p.title = attr[0]
+      p.description = attr[1]
+      p.stock = attr[2]
+      p.category_id = 0
+      p.save
+    end
+    redirect_to root_path
   end
 
   # GET /products/1 or /products/1.json
@@ -69,4 +87,12 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:title, :description, :stock)
     end
+
+  def generate_csv(products)
+    products.map do |product|
+      [product.title, product.description ,product.stock, Category.find(product.category_id).name].join(',')
+    end.join("\n")
+  end
+
+
 end
