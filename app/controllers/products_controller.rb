@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = Product.all.where(status: "public")
     respond_to do |format|
       format.html
       format.csv {send_data generate_csv(Product.all), file_name: 'products.csv'}
@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
       p.description = attr[1]
       p.stock = attr[2]
       p.category_id = 0
+      p.status = "public"
       p.save
     end
     redirect_to root_path
@@ -85,7 +86,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :stock)
+      params.require(:product).permit(:title, :description, :stock, :status)
     end
 
   def generate_csv(products)

@@ -30,6 +30,12 @@
     <%= form.number_field :stock %>
   </div>
 
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+  </div>
+  <br>
+
   <div class="actions">
     <%= form.submit %>
   </div>
