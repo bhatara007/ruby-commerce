@@ -5,7 +5,7 @@
 
 <h3 class="font-weight-bold">Products</h3>
 <% if admin_signed_in? %>
-  <%= link_to 'New Product', new_product_path %>
+  <%= link_to 'New Product', new_admins_product_path %>
   <%= link_to 'New Category', new_category_path%>
   <%= link_to 'Edit/Delete Category', categories_path %>
 <%end%>
@@ -45,16 +45,16 @@
       <td><%= product.stock %></td>
       <td><%= link_to Category.find(product.category_id).name, category_path(product.category_id) %></td>
       <td>
-        <li class="text-primary"><%= link_to 'Show', product %></li>
-        <li class="text-success'"><%= link_to 'Edit', edit_product_path(product) %></li>
-        <li class="text-danger"><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        <li class="text-primary"><%= link_to 'Show', admins_product_path(product)%></li>
+        <li class="text-success'"><%= link_to 'Edit', edit_admins_product_path(product) %></li>
+        <li class="text-danger"><%= link_to 'Delete', admins_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
-<p><%= link_to 'Download CSV File ', products_path(format: :csv) %>></p>
-<p><%= form_tag products_csv_upload_path , multipart: true  do  %>
+<p><%= link_to 'Download CSV File ', admins_products_path(format: :csv) %>></p>
+<p><%= form_tag admins_products_csv_upload_path , multipart: true  do  %>
     <%= file_field_tag :csv_file  %>
     <%= submit_tag :submit  %>
   <% end %>

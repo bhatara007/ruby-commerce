@@ -1,8 +1,7 @@
-<%= form_with(model: product) do |form| %>
+<%= form_with(model:[:admins, product]) do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
       <ul>
         <% product.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -41,7 +40,7 @@
     <% if product.primary_image.attached? %>
 
       <%= image_tag product.primary_image , width: "200px" , height: "200px" %> <br>
-      <%= link_to 'Remove', delete_image_attachment_product_url(product.primary_image.id),
+      <%= link_to 'Remove', delete_image_attachment_admins_product_url(product.primary_image.id),
                   method: :delete%>
     <% end %>
     <br>
@@ -57,7 +56,7 @@
     <% if @product.supporting_images.attached? %>
       <% @product.supporting_images.each do |image| %>
         <%= image_tag image , width: "100px" , height: "100px" %>
-        <%= link_to 'Remove', delete_image_attachment_product_url(image.id),
+        <%= link_to 'Remove', delete_image_attachment_admins_product_url(image.id),
                     method: :delete%>
       <%end%>
     <%end%>
