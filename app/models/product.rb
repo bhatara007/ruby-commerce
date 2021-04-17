@@ -1,5 +1,8 @@
 class Product < ApplicationRecord
 
+    has_one_attached :primary_image
+    has_many_attached :supporting_images
+
     belongs_to :category
     validate :no_negative_stock
 

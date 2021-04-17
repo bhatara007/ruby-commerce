@@ -11,6 +11,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def delete_image_attachment
+    @space_image = ActiveStorage::Attachment.find(params[:id])
+    @space_image.purge
+    redirect_back(fallback_location: request.referer)
+  end
+
   def csv_upload
     data = params[:csv_file].read.split("\n")
     data.each do |line|
@@ -86,7 +92,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :stock, :status)
+      params.require(:product).permit(:title, :description, :stock, :status, :primary_image, :supporting_images=>[])
     end
 
   def generate_csv(products)
@@ -94,6 +100,7 @@ class ProductsController < ApplicationController
       [product.title, product.description ,product.stock, Category.find(product.category_id).name].join(',')
     end.join("\n")
   end
+
 
 
 end

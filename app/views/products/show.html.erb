@@ -6,10 +6,24 @@
 </p>
 
 <p>
+  <% if @product.primary_image.attached? %>
+    <%= image_tag @product.primary_image , width: "300px" , height: "300px" %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Supporting images</strong> <br>
+  <% if @product.supporting_images.attached? %>
+    <% @product.supporting_images.each do |image| %>
+      <%= image_tag image , width: "100px" , height: "100px" %>
+    <%end%>
+  <%end%>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @product.description %>
 </p>
-
 <p>
   <strong>Stock:</strong>
   <%= @product.stock %>

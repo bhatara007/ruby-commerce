@@ -36,6 +36,38 @@
   </div>
   <br>
 
+  <div class="field">
+    <strong><p>Primary image</p></strong>
+    <% if product.primary_image.attached? %>
+
+      <%= image_tag product.primary_image , width: "200px" , height: "200px" %> <br>
+      <%= link_to 'Remove', delete_image_attachment_product_url(product.primary_image.id),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <br>
+    <br>
+    <%=  form.file_field :primary_image %>
+
+  </div>
+
+
+
+  <div class="field">
+    <strong><p>Supporting images</p></strong>
+    <% if @product.supporting_images.attached? %>
+      <% @product.supporting_images.each do |image| %>
+        <%= image_tag image , width: "100px" , height: "100px" %>
+        <%= link_to 'Remove', delete_image_attachment_product_url(image.id),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      <%end%>
+    <%end%>
+    <br>
+    <br>
+    <%= form.file_field :supporting_images, multiple: true%>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

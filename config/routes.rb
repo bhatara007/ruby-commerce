@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   resources :products
   root 'products#index'
 
+  resources :products do
+    member do
+      delete :delete_image_attachment
+    end
+  end
+
   namespace :products do
     post 'csv_upload'
   end
