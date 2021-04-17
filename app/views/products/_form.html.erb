@@ -42,8 +42,7 @@
 
       <%= image_tag product.primary_image , width: "200px" , height: "200px" %> <br>
       <%= link_to 'Remove', delete_image_attachment_product_url(product.primary_image.id),
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %>
+                  method: :delete%>
     <% end %>
     <br>
     <br>
@@ -59,8 +58,7 @@
       <% @product.supporting_images.each do |image| %>
         <%= image_tag image , width: "100px" , height: "100px" %>
         <%= link_to 'Remove', delete_image_attachment_product_url(image.id),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
+                    method: :delete%>
       <%end%>
     <%end%>
     <br>
