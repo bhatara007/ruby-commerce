@@ -67,7 +67,7 @@ class Admins::ProductsController < ApplicationController
     @product.category_id = params[:category_id]
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to admins_product_path(product), notice: "Product was successfully updated." }
+        format.html { redirect_to admins_product_path(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
