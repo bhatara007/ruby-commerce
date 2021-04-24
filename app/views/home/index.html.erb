@@ -1,8 +1,13 @@
 <br>
+<div>
+  <% if admin_signed_in? %>
+    <%= link_to 'New Product', new_admins_product_path %>
+    <%= link_to 'New Category', new_category_path%>
+    <%= link_to 'Edit/Delete Category', categories_path %>
+  <%end%>
+</div>
 
-<p class="text-success"><%= flash[:success].html_safe unless flash[:success].blank? %></p>
-<p class="text-danger"><%= flash[:error].html_safe unless flash[:error].blank? %></p>
-<h1 style="margin-bottom: 2rem"> Our Product </h1>
+<h1 style="margin-bottom: 2rem; margin-top: 2rem"> Our Product </h1>
 <% @products.each do |product| %>
   <div style="display: flex; padding-left: 2rem">
     <div class="card" style="width: 18rem;">
@@ -22,6 +27,10 @@
       </ul>
       <div class="card-body">
         <li class="text-primary"><%= link_to 'Show', admins_product_path(product)%></li>
+        <% if admin_signed_in? %>
+          <li class="text-success'"><%= link_to 'Edit', edit_admins_product_path(product) %></li>
+          <li class="text-danger"><%= link_to 'Delete', admins_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        <%end %>
       </div>
     </div>
 <% end %>
