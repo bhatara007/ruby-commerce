@@ -2,65 +2,30 @@
 
 <p class="text-success"><%= flash[:success].html_safe unless flash[:success].blank? %></p>
 <p class="text-danger"><%= flash[:error].html_safe unless flash[:error].blank? %></p>
-
-<h3 class="font-weight-bold">Products</h3>
-<% if admin_signed_in? %>
-  <%= link_to 'New Product', new_admins_product_path %>
-  <%= link_to 'New Category', new_category_path%>
-  <%= link_to 'Edit/Delete Category', categories_path %>
-<%end%>
-<table class="table table-striped">
-  <thead class="thead-light">
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Title</th>
-    <th scope="col" >Image</th>
-    <th scope="col" >Supporting Image</th>
-    <th scope="col">Desc</th>
-    <th scope="col">Stock</th>
-    <th scope="col">Category</th>
-    <th scope="col">Command</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @products.each do |product| %>
-    <tr>
-      <td><%= product.id %></td>
-      <td><%= product.title %></td>
-      <td>
-        <% if product.primary_image.attached? %>
-
-          <%= image_tag product.primary_image , width: "200px" , height: "200px" %>
-
-        <% end %>
-      </td>
-      <td>
-        <% if product.supporting_images.attached? %>
-          <% product.supporting_images.each do |image| %>
-            <%= image_tag image , width: "100px" , height: "100px" %>
-          <%end%>
-        <%end%>
-      </td>
-      <td><%= product.description %></td>
-      <td><%= product.stock %></td>
-      <td><%= link_to Category.find(product.category_id).name, category_path(product.category_id) %></td>
-      <td>
+<h1 style="margin-bottom: 2rem"> Our Product </h1>
+<% @products.each do |product| %>
+  <div style="display: flex; padding-left: 2rem">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" style="position: center">
+      <% if product.primary_image.attached? %>
+        <%= image_tag product.primary_image , width: "100%" , height: "240px" %>
+      <% else %>
+        <img src="https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg" style="width: 100% ; height: 240px" %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= product.title %></h5>
+        <p class="card-text"> <%= product.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Category: <%= link_to Category.find(product.category_id).name, category_path(product.category_id) %></li>
+        <li class="list-group-item">Stock: <%= product.stock %></li>
+      </ul>
+      <div class="card-body">
         <li class="text-primary"><%= link_to 'Show', admins_product_path(product)%></li>
-        <% if admin_signed_in? %>
-          <li class="text-success'"><%= link_to 'Edit', edit_admins_product_path(product) %></li>
-          <li class="text-danger"><%= link_to 'Delete', admins_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
-        <%end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<p><%= link_to 'Download CSV File ', admins_products_path(format: :csv) %>></p>
-<p><%= form_tag admins_products_csv_upload_path , multipart: true  do  %>
-    <%= file_field_tag :csv_file  %>
-    <%= submit_tag :submit  %>
-  <% end %>
-</p>
+      </div>
+    </div>
+<% end %>
 
-<br>
+  </div>
+
 
