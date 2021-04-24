@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :categories
   devise_for :admins
-  root 'admins/products#index'
+  root 'home#index'
 
   namespace :admins do
     resources :products

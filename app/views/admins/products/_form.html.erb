@@ -16,10 +16,14 @@
   </div>
 
   <div>
-    <% if product.category.id = nil?%>
-      <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Category",) %>
+    <% begin %>
+      <% if product.category.id = nil?%>
+        <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Category",) %>
       <%else%>
-      <%= select_tag(:category_id, options_for_select(@categories), :selected => Category.find(product.category_id).name) %>
+        <%= select_tag(:category_id, options_for_select(@categories), :selected => Category.find(product.category_id).name) %>
+      <% end %>
+    <% rescue => e%>
+      <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Category",) %>
     <% end %>
   </div>
   <br>

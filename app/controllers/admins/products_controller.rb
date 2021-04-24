@@ -46,6 +46,16 @@ class Admins::ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @categories = Category.all.map{|c| [ c.name, c.id ] }
+    puts "---------"
+    puts ""
+    puts ""
+    puts ""
+    puts @product.category_id
+    puts Category.find(@product.category_id).name
+    puts ""
+    puts ""
+    puts ""
+    puts "---------"
   end
 
   # POST /products or /products.json
@@ -73,6 +83,7 @@ class Admins::ProductsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
+
     end
   end
 

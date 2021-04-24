@@ -46,8 +46,10 @@
       <td><%= link_to Category.find(product.category_id).name, category_path(product.category_id) %></td>
       <td>
         <li class="text-primary"><%= link_to 'Show', admins_product_path(product)%></li>
-        <li class="text-success'"><%= link_to 'Edit', edit_admins_product_path(product) %></li>
-        <li class="text-danger"><%= link_to 'Delete', admins_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        <% if admin_signed_in? %>
+          <li class="text-success'"><%= link_to 'Edit', edit_admins_product_path(product) %></li>
+          <li class="text-danger"><%= link_to 'Delete', admins_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      <%end %>
       </td>
     </tr>
   <% end %>
