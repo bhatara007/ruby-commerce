@@ -23,7 +23,7 @@
   <a class="navbar-brand" href="#">Commerce</a>
     <div class="navbar-nav mr-auto">
       <% if admin_signed_in? %>
-        <div><%= link_to(' Home ', admins_products_path) %></div>
+        <div><%= link_to(' Home ', home_index_path) %></div>
         <div><%= link_to " Sign out ", destroy_admin_session_path, :method => :delete %></div>
       <% else %>
         <div><%= link_to(' Home ', admins_products_path) %></div>

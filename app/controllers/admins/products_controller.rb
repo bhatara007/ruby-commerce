@@ -91,10 +91,24 @@ class Admins::ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+      format.html { redirect_to home_index_path, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
     end
   end
+
+  def create_order
+    @products = Product.find(params['product_id'])
+    if request.post?
+      customer_name = params['customer_name']
+      address = params['address']
+      now = Time.now
+      @order = @products.orders.create(product_id: @product, customer_name: customer_name, address: address)
+
+      redirect_to '/'
+    end
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -112,6 +126,8 @@ class Admins::ProductsController < ApplicationController
       [product.title, product.description ,product.stock, Category.find(product.category_id).name].join(',')
     end.join("\n")
   end
+
+
 
 
 

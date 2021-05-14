@@ -1,0 +1,18 @@
+<%= form_tag(admins_product_create_order_path) do %>
+
+  <div class="field">
+    <%= label_tag :customer_name %>
+    <%= text_field_tag "customer_name", nil, :required => true %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :address %>
+    <%= text_field_tag "address", nil, :required => true %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Submit", class: 'btn btn-primary' %>
+  </div>
+
+  <%= link_to 'Back', '/' %>
+<% end %>
