@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :orders
   resources :categories
   resources :home
   devise_for :admins
@@ -9,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :products
-
+    resources :orders
     resources :products do
       match '/create_order' => 'products#create_order', via: [:get, :post]
       match '/order_list' => 'products#order_list', via: [:get, :post]
